@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AvaloniaDemo.ViewModels;
+
+namespace AvaloniaDemo.ViewModels
+{
+    public class HomePageViewModel : PageViewModelBase
+    {
+    }
+}

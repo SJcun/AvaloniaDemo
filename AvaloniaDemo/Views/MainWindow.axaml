@@ -1,0 +1,73 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaDemo.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaDemo.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Width="1200"
+        Height="600"
+        Title="AvaloniaDemo程序">
+
+    <Design.DataContext>
+        <!--绑定ViewModel-->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="160,*">
+        <!--侧边按钮-->
+        <Border BorderThickness="0" Background="#37a0ea">
+            <StackPanel>
+                <Border BorderThickness="0" Height="100">
+                    <Image Source="avares://AvaloniaDemo/Assets/Img/monitor.png" Width="35" Height="35"/>
+                </Border>
+                <!--绑定一个集合，展示导航菜单按钮-->
+                <ItemsControl ItemsSource="{Binding MenuButtons}" >
+                    <!--模板-->
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding CommandEvent}" 
+                                    Margin="1,1" 
+                                    Background="Transparent"
+                                    Width="{Binding $parent[StackPanel].Bounds.Width}">
+                                <Grid ColumnDefinitions="Auto,*">
+                                    <Image Source="{Binding ImagSource}" 
+                                           Width="24" 
+                                           Height="24" 
+                                           Stretch="Fill" />
+                                    <TextBlock Grid.Column="1" 
+                                               Text="{Binding ButtonContent}" 
+                                               Foreground="White"
+                                               VerticalAlignment="Center" 
+                                               HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+		
+        <!--主区域-->
+        <Border Background="#f3f6f9" Grid.Column="1">
+            <Grid RowDefinitions="10,40,*">
+                <Border Grid.Row="1">
+                    <TextBlock Text="{Binding Title}" 
+                               VerticalAlignment="Center"
+                               FontSize="25"
+                               Foreground="DarkSlateGray"
+                               FontWeight="Bold"
+                               Margin="15,0,0,0" />
+                </Border>
+
+                <!--展示内容-->
+                <Border Grid.Row="2">
+                    <TransitioningContentControl Content="{Binding CurrentPage}" />
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+
+</Window>
